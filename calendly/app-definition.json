@@ -1,0 +1,318 @@
+{
+  "type": "integration",
+  "auth": {
+    "type": "oauth2",
+    "config": {
+      "authURL": "$func$",
+      "getAccessToken": "$func$",
+      "refreshAccessToken": "$func$",
+      "getConnectionName": "$func$"
+    },
+    "verifyAPI": "$func$"
+  },
+  "beforeMiddlewares": [
+    "$func$"
+  ],
+  "triggers": {},
+  "actions": {
+    "list_events": {
+      "key": "list_events",
+      "noun": "event",
+      "title": "List events",
+      "type": "read",
+      "params": [
+        {
+          "key": "status",
+          "name": "Event status",
+          "description": "Active/Cancelled",
+          "type": "select",
+          "options": [
+            {
+              "text": "Active",
+              "value": "&status=active"
+            },
+            {
+              "text": "Canceled",
+              "value": "&status=canceled"
+            },
+            {
+              "text": "All",
+              "value": "all"
+            }
+          ],
+          "required": true
+        }
+      ],
+      "handler": "$func$",
+      "ac_mappings": "$func$",
+      "is_multiple": true,
+      "sample": {}
+    },
+    "get_event": {
+      "key": "get_event",
+      "noun": "event",
+      "title": "Get an event",
+      "type": "read",
+      "params": [
+        {
+          "key": "status",
+          "name": "Event status",
+          "description": "Active/Cancelled",
+          "type": "select",
+          "options": [
+            {
+              "text": "Active",
+              "value": "&status=active"
+            },
+            {
+              "text": "Canceled",
+              "value": "&status=canceled"
+            },
+            {
+              "text": "All",
+              "value": "all"
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "uri",
+          "name": "Event name/type",
+          "description": "15 Minute Meeting",
+          "type": "string",
+          "required": true,
+          "depends_on": [
+            "status"
+          ],
+          "source": "list_events.id"
+        }
+      ],
+      "handler": "$func$",
+      "sample": {}
+    },
+    "list_event_types": {
+      "key": "list_event_types",
+      "noun": "type",
+      "title": "List event types",
+      "type": "read",
+      "params": [],
+      "handler": "$func$",
+      "sample": {},
+      "is_multiple": true,
+      "ac_mappings": {
+        "option": "name",
+        "value": "uri"
+      }
+    },
+    "list_event_invitees": {
+      "key": "list_event_invitees",
+      "noun": "invitee",
+      "title": "List event invitees",
+      "type": "read",
+      "params": [
+        {
+          "key": "status",
+          "name": "Event status",
+          "description": "Active/Cancelled",
+          "type": "select",
+          "options": [
+            {
+              "text": "Active",
+              "value": "&status=active"
+            },
+            {
+              "text": "Canceled",
+              "value": "&status=canceled"
+            },
+            {
+              "text": "All",
+              "value": "all"
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "uri",
+          "name": "Event type/name",
+          "description": "15 Minute Meeting",
+          "type": "string",
+          "required": true,
+          "source": "list_events.id",
+          "depends_on": [
+            "status"
+          ]
+        }
+      ],
+      "handler": "$func$",
+      "sample": {},
+      "is_multiple": true,
+      "ac_mappings": "$func$"
+    },
+    "get_event_invitee": {
+      "key": "get_event_invitee",
+      "noun": "event",
+      "title": "Get an event invitee",
+      "type": "read",
+      "params": [
+        {
+          "key": "status",
+          "name": "Event status",
+          "description": "Active/Cancelled",
+          "type": "select",
+          "options": [
+            {
+              "text": "Active",
+              "value": "&status=active"
+            },
+            {
+              "text": "Canceled",
+              "value": "&status=canceled"
+            },
+            {
+              "text": "All",
+              "value": "all"
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "uri",
+          "name": "Event type/name",
+          "description": "15 Minute Meeting",
+          "type": "string",
+          "required": true,
+          "source": "list_events.id",
+          "depends_on": [
+            "status"
+          ]
+        },
+        {
+          "key": "inviteeUri",
+          "name": "Invitee name",
+          "description": "gabby",
+          "type": "string",
+          "required": true,
+          "depends_on": [
+            "uri"
+          ],
+          "source": "list_event_invitees.id"
+        }
+      ],
+      "handler": "$func$",
+      "sample": {}
+    },
+    "list_scheduling_links": {
+      "key": "list_scheduling_links",
+      "noun": "link",
+      "title": "List scheduling links",
+      "type": "read",
+      "params": [],
+      "handler": "$func$",
+      "sample": {},
+      "is_multiple": true,
+      "ac_mappings": {
+        "option": "name",
+        "value": "uri"
+      }
+    },
+    "create_link": {
+      "key": "create_link",
+      "noun": "link",
+      "title": "Create scheduling link",
+      "type": "write",
+      "params": [
+        {
+          "key": "uri",
+          "name": "Event types",
+          "description": "15 Minute Meeting",
+          "type": "string",
+          "required": true,
+          "source": "list_event_types.id"
+        }
+      ],
+      "handler": "$func$",
+      "sample": {}
+    },
+    "list_organization_memberships": {
+      "key": "list_organization_memberships",
+      "noun": "membership",
+      "title": "List organization memberships",
+      "type": "read",
+      "params": [],
+      "handler": "$func$",
+      "sample": {},
+      "is_multiple": true,
+      "ac_mappings": "$func$"
+    },
+    "get_organization_membership": {
+      "key": "get_organization_membership",
+      "noun": "membership",
+      "title": "Get organization membership",
+      "type": "read",
+      "params": [
+        {
+          "key": "membershipUrl",
+          "name": "Membership ID",
+          "description": "1234567890",
+          "type": "string",
+          "required": true,
+          "source": "list_organization_memberships"
+        }
+      ],
+      "handler": "$func$",
+      "sample": {}
+    },
+    "list_organization_invitations": {
+      "key": "list_organization_invitations",
+      "noun": "invitation",
+      "title": "List organization invitations",
+      "type": "read",
+      "params": [],
+      "handler": "$func$",
+      "sample": {},
+      "is_multiple": true,
+      "ac_mappings": {
+        "option": "email",
+        "value": "uri"
+      }
+    },
+    "get_organization_invitation": {
+      "key": "get_organization_invitation",
+      "noun": "invitation",
+      "title": "Get organization invitation",
+      "type": "read",
+      "params": [
+        {
+          "key": "invitationUrl",
+          "name": "Event types",
+          "description": "15 Minute Meeting",
+          "type": "string",
+          "required": true,
+          "source": "list_organization_invitations"
+        }
+      ],
+      "handler": "$func$",
+      "sample": {}
+    },
+    "invite_user_to_organization": {
+      "key": "invite_user_to_organization",
+      "noun": "user",
+      "title": "Invite user to an organization",
+      "type": "write",
+      "params": [
+        {
+          "key": "userEmail",
+          "name": "User email",
+          "description": "john_doe@gmail.com",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "handler": "$func$",
+      "sample": {}
+    }
+  },
+  "hosts": [
+    "calendly.com"
+  ]
+}

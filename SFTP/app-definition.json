@@ -1,0 +1,112 @@
+{
+  "type": "integration",
+  "auth": {
+    "type": "custom",
+    "config": {
+      "getConnectionName": "$func$"
+    },
+    "verifyAPI": "$func$",
+    "auth_fields": [
+      {
+        "key": "host",
+        "description": "Hostname/IP",
+        "type": "string",
+        "required": true,
+        "text": "127.0.0.1"
+      },
+      {
+        "key": "username",
+        "description": "Username",
+        "type": "string",
+        "required": true,
+        "text": "john_doe"
+      },
+      {
+        "key": "password",
+        "description": "Password",
+        "type": "string",
+        "is_password": true,
+        "required": true
+      }
+    ]
+  },
+  "beforeMiddlewares": [],
+  "afterMiddlewares": [],
+  "triggers": {},
+  "actions": {
+    "upload_file": {
+      "key": "upload_file",
+      "noun": "file",
+      "title": "Upload a file",
+      "type": "write",
+      "params": [
+        {
+          "key": "url",
+          "name": "Url of a file to upload",
+          "type": "string",
+          "required": true
+        },
+        {
+          "key": "fileName",
+          "name": "File name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "key": "folderName",
+          "name": "Directory you wish to upload to",
+          "type": "string",
+          "required": true,
+          "source": "list_dirs"
+        }
+      ],
+      "handler": "$func$",
+      "sample": {}
+    },
+    "list_dirs": {
+      "key": "list_dirs",
+      "noun": "directory",
+      "title": "List directories",
+      "type": "read",
+      "params": [
+        {
+          "key": "folderName",
+          "name": "Destination folder",
+          "description": "🔄 Refresh to display nested folders",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "handler": "$func$",
+      "sample": {},
+      "hidden": true,
+      "ac_mappings": {
+        "option": "name",
+        "value": "path"
+      }
+    },
+    "list_dir_content": {
+      "key": "list_dir_content",
+      "noun": "directory",
+      "title": "List directory content",
+      "type": "read",
+      "params": [
+        {
+          "key": "folderName",
+          "name": "Destination folder",
+          "description": "🔄 Refresh to display nested folders",
+          "type": "string",
+          "required": false,
+          "source": "list_dirs"
+        }
+      ],
+      "handler": "$func$",
+      "sample": {},
+      "ac_mappings": {
+        "option": "name",
+        "value": "path"
+      }
+    }
+  },
+  "contextsMapping": []
+}

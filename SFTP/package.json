@@ -1,0 +1,31 @@
+{
+    "name": "sftp",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "gab": "node ./actions/upload_file",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "update-sdk": "npm install @ply-io/ply-sdk@latest",
+        "deploy-app": "ply-cli --release --profile local",
+        "deploy-app-staging": "ply-cli --release --profile staging",
+        "deploy-app-production": "ply-cli --release --profile production",
+        "release-app": "npm run update-sdk && npm run deploy-app",
+        "release-app-staging": "npm run update-sdk && npm run deploy-app-staging",
+        "release-app-production": "npm run update-sdk && npm run deploy-app-production"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@ply-io/ply-sdk": "^0.0.97",
+        "eslint": "^8.13.0",
+        "ssh2-sftp-client": "^8.0.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.13.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.25.3",
+        "nodemon": "^2.0.16"
+    }
+}
