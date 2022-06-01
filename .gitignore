@@ -1,1 +1,6 @@
-.env
+sample.js
+ply-cli-config.json
+.env*
+lambda.zip
+app-definition.json
+package-lock.json

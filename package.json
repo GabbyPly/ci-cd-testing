@@ -1,23 +1,46 @@
 {
-  "name": "fake-app-integrations",
-  "version": "1.0.0",
-  "description": "Hello",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GabbyPly/ci-cd-testing.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GabbyPly/ci-cd-testing/issues"
-  },
-  "homepage": "https://github.com/GabbyPly/ci-cd-testing#readme",
-  "dependencies": {
-    "@actions/core": "^1.8.2"
-  }
+    "name": "fake-app-integrations",
+    "version": "1.0.0",
+    "description": "Hello",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GabbyPly/ci-cd-testing.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/GabbyPly/ci-cd-testing/issues"
+    },
+    "homepage": "https://github.com/GabbyPly/ci-cd-testing#readme",
+    "dependencies": {
+        "@actions/core": "^1.8.2",
+        "@actions/github": "^5.0.3"
+    },
+    "workspaces": [
+        "calendly",
+        "calendly",
+        "calendly",
+        "calendly",
+        "calendly",
+        "bitly",
+        "bitly",
+        "bitly",
+        "bitly",
+        "bitly",
+        "mindee",
+        "mindee",
+        "mindee",
+        "mindee",
+        "mindee",
+        "sftp",
+        "sftp",
+        "sftp",
+        "sftp",
+        "sftp"
+    ]
 }
