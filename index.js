@@ -11,7 +11,7 @@ try {
     const y = changedFiles.split('/');
     console.log('y', y);
 
-    const integrationsToRelease = maybeRlsCmd.join(' -w ');
+    const integrationsToRelease = integrationsMaybe.join(' -w ');
     console.log('integrationsToRelease', integrationsToRelease);
     const releaseCmd = `npm run release-app ${integrationsToRelease}`;
     core.setOutput('release', releaseCmd);
