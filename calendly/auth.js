@@ -1,6 +1,6 @@
 const { OAuthRedirectUrl, OAuthTokenUrl } = require('./consts');
 const { GRANT_TYPE_CODE, GRANT_TYPE_REFRESH } = require('./consts');
-const y = '';
+
 const { CLIENT_SECRET, CLIENT_ID } = process.env;
 // some change
 const getAuthURL = (data) => {
@@ -49,8 +49,8 @@ const refreshAccessToken = async (data) => {
 const verifyAPI = async (data) => {
   const { fetch } = data.libs;
   const url = `https://api.calendly.com/users/me`;
-  const { json } = await fetch(url);
-  return json;
+  const r = await fetch(url);
+  return r.json;
 };
 
 const getConnectionName = async (data) =>
