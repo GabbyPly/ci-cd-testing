@@ -3,11 +3,20 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-    // `who-to-greet` input defined in action metadata file
-    const nameToGreet = core.getInput('who-to-greet');
-    console.log(`Hello ${nameToGreet}!`);
-    const time = new Date().toTimeString();
-    core.setOutput('time', time);
+    // `files` input defined in action metadata file
+    const changedFiles = core.getInput('files');
+    console.log(`changed files: ${changedFiles}`);
+    const integrationsMaybe = changedFiles.split(' ');
+    console.log('integrationsMaybe', integrationsMaybe);
+    const y = changedFiles.split('/');
+    console.log('y', y);
+
+    const integrationsToRelease = maybeRlsCmd.join(' -w ');
+    console.log('integrationsToRelease', integrationsToRelease);
+    const releaseCmd = `npm run release-app ${integrationsToRelease}`;
+    core.setOutput('release', releaseCmd);
+
+    // Un-necessary ?
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2);
     console.log(`The event payload: ${payload}`);

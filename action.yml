@@ -1,13 +1,13 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-    who-to-greet: # id of input
-        description: 'Who to greet'
+    files: # id of input
+        description: 'Changed files'
         required: true
-        default: 'World'
+        default: '/fake-app-integrations/calendly/auth.js'
 outputs:
-    time: # id of output
-        description: 'The time we greeted you'
+    release: # id of output
+        description: 'The release cmd to run in the next step'
 runs:
     using: 'node16'
     main: 'index.js'

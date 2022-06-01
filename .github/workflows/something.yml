@@ -1,4 +1,4 @@
-name: Gabby testing github workflows
+name: Release integration
 
 on:
     pull_request:
@@ -7,11 +7,10 @@ on:
     push:
         branches:
             - main
-            - trail
 jobs:
-    gabby-first-job:
+    release_when_files_changed:
         runs-on: ubuntu-latest
-        name: gabby-job name
+        name: Release integrations that files were changed in
         steps:
             - name: Check out repo
               uses: actions/checkout@v3
