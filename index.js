@@ -1,7 +1,8 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
-const env = 'staging';
+// const github = require('@actions/github');
+
 const { workspaces } = require('./package.json');
+const env = 'staging';
 
 try {
     // `files` input defined in action metadata file
@@ -11,17 +12,31 @@ try {
     console.log(`changed files: ${changedFiles}`);
     const inWorkspace = [];
     changedFiles.forEach((file) => {
-        const splitted = file.includes('/')
-            ? file.split('/')[0]
-            : file.includes('\\') /* support Backslash as well as forward  */
-            ? file.split('\\')[0]
-            : file;
-        if (workspaces.includes(splitted) && !inWorkspace.includes(splitted)) {
-            inWorkspace.push(splitted);
+        let integration;
+        if (file.includes('/')) {
+            integration = file.split('/')[0];
+        } else if (file.includes('\\')) {
+            /* Should support Backslash as well as forward ?*/
+            file.split('\\')[0];
         } else {
-            // Check custom changes that are ok before throwing ?
-            // Like package.json, .github/workflows, ply-cli-config.json
-            // Could do with else if
+            // TODO could address root folders files here such as package.json (readme, .gitignore, .env, That's it ? )
+            // Shouldn't
+            // integration = file;
+        }
+
+        if (
+            workspaces.includes(integration) &&
+            !inWorkspace.includes(integration)
+        ) {
+            inWorkspace.push(integration);
+        } else {
+            // Could do with else if that checks custom changes that are ok before throwing ?
+            // for example: package.json, .github/workflows
+            if (inWorkspace.includes(integration)) {
+                console.log(
+                    `Already added ${integration} to integrations that will be released`
+                );
+            }
             console.log(`${file} is not in any of the workspaces`);
             // The above log should be:
             // throw new Error('File is not in any of the workspaces');
@@ -34,11 +49,11 @@ try {
     );
     console.log('appendToCmd', appendToCmd);
     core.setOutput('release', `npm run release-app-${env} ${appendToCmd}`);
-
-    // Un-necessary ?
-    // Get the JSON webhook payload for the event that triggered the workflow
-    // const payload = JSON.stringify(github.context.payload, undefined, 2);
-    // console.log(`The event payload: ${payload}`);
 } catch (error) {
     core.setFailed(error.message);
 }
+
+// Un-necessary ?
+// Get the JSON webhook payload for the event that triggered the workflow
+// const payload = JSON.stringify(github.context.payload, undefined, 2);
+// console.log(`The event payload: ${payload}`);
