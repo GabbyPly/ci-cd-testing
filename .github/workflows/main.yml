@@ -4,17 +4,14 @@ on:
             - main
 
 jobs:
-    hello_world_job:
+    release_changed_integrations:
         runs-on: ubuntu-latest
-        name: A job to say hello
+        name: Release workspaces with changed files
         steps:
-            # To use this repository's private action,
-            # you must check out the repository
             - name: Checkout
               uses: actions/checkout@v3
               # this could be subbed if wanted with:
               # GabbyPly/ci-cd-testing@v1.2
-              # Should be un-commented when pushing to github
             - name: Get changed files as json
               id: files
               uses: jitterbit/get-changed-files@v1
@@ -24,7 +21,7 @@ jobs:
               uses: ./ # Uses an action in the root directory
               id: cmd
               with:
-                  files: ${{ steps.files.outputs.all }} # maybe only one {} ?
+                  files: ${{ steps.files.outputs.all }}
             # Use the output from the `cmd` step
             - name: Get the command to run
               run: ${{ steps.cmd.outputs.release }} # Counting on the cmd step to output a value under the 'release' command
