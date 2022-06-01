@@ -22,8 +22,8 @@ jobs:
             - id: files
             - name: Get changed files as json
               uses: jitterbit/get-changed-files@v1
-              with:
-                  format: 'json'
+              # with:
+              #     format: 'json'
             - name: Get release cmd action
               uses: ./ # Uses an action in the root directory
               id: cmd
