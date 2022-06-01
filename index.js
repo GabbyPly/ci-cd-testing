@@ -32,7 +32,7 @@ try {
         (prev, curr) =>
             `${prev.includes('-w') ? prev : `-w ${prev}`}` + ` -w ${curr}`
     );
-    console.log('rlsCmd', rlsCmd);
+    console.log('appendToCmd', appendToCmd);
     core.setOutput('release', `npm run release-app-${env} ${appendToCmd}`);
 
     // Un-necessary ?
