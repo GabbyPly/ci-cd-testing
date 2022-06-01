@@ -21,9 +21,11 @@ jobs:
               # Should be un-commented when pushing to github
             - id: files
             - name: Get changed files as json
-              uses: jitterbit/get-changed-files@v1
-              with:
-                  format: 'json'
+              # uses: jitterbit/get-changed-files@v1
+              # with:
+              #     format: 'json'
+              run: |
+                  something in the way
             - name: Get release cmd action
               uses: ./ # Uses an action in the root directory
               id: cmd
