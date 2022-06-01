@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-
+const env = 'staging';
 const { workspaces } = require('./package.json');
 
 try {
@@ -28,12 +28,12 @@ try {
         }
     });
 
-    const rlsCmd = inWorkspace.reduce(
+    const appendToCmd = inWorkspace.reduce(
         (prev, curr) =>
             `${prev.includes('-w') ? prev : `-w ${prev}`}` + ` -w ${curr}`
     );
     console.log('rlsCmd', rlsCmd);
-    core.setOutput('release', rlsCmd);
+    core.setOutput('release', `npm run release-app-${env} ${appendToCmd}`);
 
     // Un-necessary ?
     // Get the JSON webhook payload for the event that triggered the workflow
