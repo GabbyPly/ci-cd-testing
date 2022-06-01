@@ -4,14 +4,18 @@ const github = require('@actions/github');
 
 try {
     // `files` input defined in action metadata file
-    const changedFiles = core.getInput('files');
+    let changedFiles = core.getInput('files');
     console.log(`changed files: ${changedFiles}`);
+    changedFiles = changedFiles || `calendly bitly mindee sftp`; // TODO Delete me
     const integrationsMaybe = changedFiles.split(' ');
     console.log('integrationsMaybe', integrationsMaybe);
     const y = changedFiles.split('/');
     console.log('y', y);
 
-    const integrationsToRelease = integrationsMaybe.join(' -w ');
+    const separatedWithDashW = integrationsMaybe.map(
+        (integration) => ` -w ${integration}`
+    );
+    const integrationsToRelease = separatedWithDashW.join('');
     console.log('integrationsToRelease', integrationsToRelease);
     const releaseCmd = `npm run release-app ${integrationsToRelease}`;
     core.setOutput('release', releaseCmd);
