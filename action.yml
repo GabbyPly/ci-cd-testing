@@ -1,12 +1,12 @@
-name: 'Hello World'
+name: 'Gets release command for ply-cli'
 description: 'Greet someone and record the time'
 inputs:
-    files: # id of input
+    files: # files is the id of the input
         description: 'Changed files'
         required: true
-        default: '/fake-app-integrations/calendly/auth.js'
+        default: '/fake-app-integrations/calendly/auth.js' # In what scenario will this be received by the action ? explicitly {required: false} ?
 outputs:
-    release: # id of output
+    release: # release is the id of the output
         description: 'The release cmd to run in the next step'
 runs:
     using: 'node16'
