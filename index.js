@@ -17,7 +17,7 @@ try {
             integration = file.split('/')[0];
         } else if (file.includes('\\')) {
             /* Should support Backslash as well as forward ?*/
-            file.split('\\')[0];
+            integration = file.split('\\')[0];
         } else {
             // TODO could address root folders files here such as package.json (readme, .gitignore, .env, That's it ? )
             // Shouldn't
