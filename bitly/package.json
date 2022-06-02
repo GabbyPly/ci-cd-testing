@@ -16,11 +16,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-<<<<<<< HEAD
         "@ply-io/ply-sdk": "^0.0.99",
-=======
-        "@ply-io/ply-sdk": "^0.0.97",
->>>>>>> main
         "mime": "^3.0.0"
     },
     "devDependencies": {
