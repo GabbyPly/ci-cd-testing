@@ -43,9 +43,8 @@ try {
         }
     });
 
-    const appendToCmd = inWorkspace.reduce(
-        (prev, curr) =>
-            `${prev.includes('-w') ? prev : `-w ${prev}`}` + ` -w ${curr}`
+    const appendToCmd = inWorkspace.reduce((prev, curr) =>
+        prev.includes('-w') ? prev : `-w ${prev}` + ` -w ${curr}`
     );
     console.log('appendToCmd', appendToCmd);
     core.setOutput('release', `npm run release-app-${env} ${appendToCmd}`);
