@@ -2,7 +2,6 @@ const Client = require('ssh2-sftp-client');
 const sftp = new Client('');
 
 const getConnectionName = async ({ input }) => input.config.username || 'SFTP';
-
 const verifyAPI = async (data) => {
     const { host, username, password } = data.authData;
     if (!host || !username || !password) {
